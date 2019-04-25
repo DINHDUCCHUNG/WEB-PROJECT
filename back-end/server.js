@@ -2,9 +2,8 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const cors = require("cors");
+const cors  = require('cors')
 const expressSession = require("express-session");
-const adminRouter = require("./api/admin/routes");
 const postRouter = require("./api/posts/routes");
 const customerRouter = require("./api/customer/routes");
 const productionRouter = require("./api/productions/routes");
@@ -26,19 +25,22 @@ mongoose.connect("mongodb://localhost:27017/webProjectMypham", error => {
       saveUninitialized: true
     })
   );
+  server.use(cors({
+    origin: ['http://localhost:3000'],
+    credentials: true,
+  }));
 
   // routes
-  server.use("/api/admin", adminRouter);
   server.use("/api/posts", postRouter);
   server.use("/api/customer", customerRouter);
   server.use("/api/productions", productionRouter);
   server.use("/api/auth", authRouter);
 
   //start server
-  server.listen(3000, error => {
+  server.listen(3001, error => {
     if (error) {
       throw error;
     }
-    console.log("Listen to post 3000.....");
+    console.log("Listen to post 3001.....");
   });
 });

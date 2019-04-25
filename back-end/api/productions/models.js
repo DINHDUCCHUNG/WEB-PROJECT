@@ -4,7 +4,9 @@ const mongoose = require('mongoose');
 // prize
 const ProductionSchema = new mongoose.Schema({
     image: String,
-    name: String,
+    title: String,
+    category: String,
+    description: String,
     prize: Number
 });
 
